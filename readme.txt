@@ -1,10 +1,10 @@
-=== PandamusRex Email Webhooks for WooCommerce ===
+=== PandamusRex Email Webhook for WooCommerce ===
 Contributors: pandamusrex
 Donate link: https://pandamusrex.com/
 Tags: woocommerce
 Requires at least: 6.4
 Tested up to: 6.8
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 Requires PHP: 7.0
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -22,6 +22,9 @@ Assign payment receipt emails and complete orders with a webhook that connects y
 Yes!
 
 == Changelog ==
+
+= 1.2.0 =
+* Set up auth
 
 = 1.1.0 =
 * Rename plugin

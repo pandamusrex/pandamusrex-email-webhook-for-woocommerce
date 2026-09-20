@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class PandamusRex_Email_Webhooks_History_Db {
+class PandamusRex_Email_Webhook_History_Db {
     public static function getTableName() {
         global $wpdb;
         return $wpdb->prefix . 'pandamusrex_email_wbhks_hst';
@@ -12,7 +12,7 @@ class PandamusRex_Email_Webhooks_History_Db {
 
     public static function create_tables() {
         global $wpdb;
-        $table_name = PandamusRex_Email_Webhooks_History_Db::getTableName();
+        $table_name = PandamusRex_Email_Webhook_History_Db::getTableName();
         $charset_collate = $wpdb->get_charset_collate();
 
         $sql = "CREATE TABLE $table_name (
@@ -64,7 +64,7 @@ class PandamusRex_Email_Webhooks_History_Db {
             ]
         );
         if ( false === $result ) {
-            return new WP_Error( 'pandamusrex-email-webhooks', $wpdb->last_error );
+            return new WP_Error( 'pandamusrex-email-webhook', $wpdb->last_error );
         }
 
         $data[ 'id' ] = $wpdb->insert_id;

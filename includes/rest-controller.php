@@ -4,10 +4,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class PandamusRex_Email_Webhooks_Rest_Controller extends \WP_REST_Controller {
+class PandamusRex_Email_Webhook_Rest_Controller extends \WP_REST_Controller {
 
     protected $namespace = 'pandamusrex/v1';
-    protected $rest_base = 'email-webhooks';
+    protected $rest_base = 'email-webhook';
 
     public function register_routes() {
         // TODO - delete this test route before production
@@ -54,7 +54,7 @@ class PandamusRex_Email_Webhooks_Rest_Controller extends \WP_REST_Controller {
         $email_sender = str_replace( "<", "", $email_sender );
         $email_sender = str_replace( ">", "", $email_sender );
 
-        $result = PandamusRex_Email_Webhooks_Db::record_webhook(
+        $result = PandamusRex_Email_Webhook_Db::record_webhook(
             $email_subject,
             $email_received,
             $email_sender,
@@ -70,6 +70,6 @@ class PandamusRex_Email_Webhooks_Rest_Controller extends \WP_REST_Controller {
     }
 
     public function check_permission() {
-        return TRUE; // TODO lock this down
+        return current_user_can( 'edit_users' );
     }
 }

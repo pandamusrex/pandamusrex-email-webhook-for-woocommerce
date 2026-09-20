@@ -1,9 +1,8 @@
-# PandamusRex Email Webhooks for WooCommerce
+# PandamusRex Email Webhook for WooCommerce
 
 ## TO DO
 
 - [x] Design tables
-- [x] Rename webhook to webhooks (plural)
 - [x] Comment out old post type code
 - [x] Create tables
 - [x] Create persistence layer for each table
@@ -31,7 +30,7 @@
 
 ```
 function myFunction() {
-  var url = "https://pandamusrex.com/wp-json/pandamusrex/v1/email-webhooks/";
+  var url = "https://pandamusrex.com/wp-json/pandamusrex/v1/email-webhook/";
   // TODO AUTHORIZATION API KEY
 
   var labelName = "POSTedToStore";

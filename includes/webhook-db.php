@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class PandamusRex_Email_Webhooks_Db {
+class PandamusRex_Email_Webhook_Db {
     public static function getTableName() {
         global $wpdb;
         return $wpdb->prefix . 'pandamusrex_email_wbhks';
@@ -12,7 +12,7 @@ class PandamusRex_Email_Webhooks_Db {
 
     public static function create_tables() {
         global $wpdb;
-        $table_name = PandamusRex_Email_Webhooks_Db::getTableName();
+        $table_name = PandamusRex_Email_Webhook_Db::getTableName();
         $charset_collate = $wpdb->get_charset_collate();
 
         $sql = "CREATE TABLE $table_name (
@@ -50,7 +50,7 @@ class PandamusRex_Email_Webhooks_Db {
             return $results[0];
         }
 
-        return new WP_Error( 'pandamusrex-email-webhooks', $wpdb->last_error );
+        return new WP_Error( 'pandamusrex-email-webhook', $wpdb->last_error );
     }
 
     public static function record_webhook( $email_subject, $email_received, $email_sender, $email_body ) {
@@ -76,19 +76,19 @@ class PandamusRex_Email_Webhooks_Db {
             ]
         );
         if ( false === $result ) {
-            return new WP_Error( 'pandamusrex-email-webhooks', $wpdb->last_error );
+            return new WP_Error( 'pandamusrex-email-webhook', $wpdb->last_error );
         }
 
         $data[ 'id' ] = $wpdb->insert_id;
 
-        $result = PandamusRex_Email_Webhooks_History_Db::add_history_for_webhook(
+        $result = PandamusRex_Email_Webhook_History_Db::add_history_for_webhook(
             $data[ 'id' ],
             0,
-            __( 'Email added to database', 'pandamusrex-email-webhooks' )
+            __( 'Email added to database', 'pandamusrex-email-webhook' )
         );
 
         if ( false === $result ) {
-            return new WP_Error( 'pandamusrex-email-webhooks', $wpdb->last_error );
+            return new WP_Error( 'pandamusrex-email-webhook', $wpdb->last_error );
         }
 
         return $data;
@@ -116,15 +116,15 @@ class PandamusRex_Email_Webhooks_Db {
         );
 
         if ( false === $result ) {
-            return new WP_Error( 'pandamusrex-email-webhooks', $wpdb->last_error );
+            return new WP_Error( 'pandamusrex-email-webhook', $wpdb->last_error );
         }
 
         $note = sprintf(
-            __( 'Updated order ID to %d', 'pandamusrex-email-webhooks' ),
+            __( 'Updated order ID to %d', 'pandamusrex-email-webhook' ),
             $order_id
         );
 
-        return PandamusRex_Email_Webhooks_History_Db::add_history_for_webhook(
+        return PandamusRex_Email_Webhook_History_Db::add_history_for_webhook(
             $webhook_id, // webhook id
             0,           // user id
             $note        // note
@@ -145,7 +145,7 @@ class PandamusRex_Email_Webhooks_Db {
         );
 
         if ( false === $result ) {
-            return new WP_Error( 'pandamusrex-email-webhooks', $wpdb->last_error );
+            return new WP_Error( 'pandamusrex-email-webhook', $wpdb->last_error );
         }
 
         return true;
