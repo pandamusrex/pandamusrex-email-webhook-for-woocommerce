@@ -95,11 +95,6 @@ class PandamusRex_Payment_Notifications_Admin {
     }
 
     public function echo_do_update() {
-        wp_admin_notice(
-            __( 'Update not yet implemented', 'pandamusrex-email-webhook' ),
-                [ 'type' => 'error' ]
-        );
-
         // Check id (field is id in form)
         // Check notification_nonce (notification-{id}) nonce
         // Get order assignment (order_id in form)

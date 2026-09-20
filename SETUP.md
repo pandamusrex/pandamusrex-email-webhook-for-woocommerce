@@ -20,10 +20,11 @@
 9. Click on Add script property again
 10. In the Property box type "APIPASS" (no quotes)
 11. In the Value box paste the application password you obtained above
-9. Click on Add script property again
-10. In the Property box type "APIURL" (no quotes)
-11. In the Value box paste https://YOURDOMAIN/wp-json/pandamusrex/v1/email-webhook/ (be sure to replace YOURDOMAIN with your domain first)
-12. Click on Save script properties
+12. Click on Add script property again
+13. In the Property box type "APIURL" (no quotes)
+14. In the Value box paste https://YOURDOMAIN/wp-json/pandamusrex/v1/email-webhook/ (be sure to replace YOURDOMAIN with your domain first)
+15. OPTIONAL - if you want to limit emails forwarded to the webhook, include a KEYWORD that must be in the title. To do so: Click on Add script property again, in the Property box type "KEYWORD" (no quotes) and in the Value box enter your keyword, e.g. "Zelle" (no quotes). The search is case insensitive.
+16. Click on Save script properties
 
 # Next, setup the app permissions
 
@@ -68,6 +69,7 @@ function myFunction() {
   const APIUSER = scriptProperties.getProperty('APIUSER');
   const APIPASS = scriptProperties.getProperty('APIPASS');
   const APIURL = scriptProperties.getProperty('APIURL');
+  const KEYWORD = scriptProperties.getProperty('KEYWORD');
 
   if (APIUSER == null) {
     Logger.log("ERROR: APIUSER not found in Script Properties. Aborting.");
@@ -84,9 +86,13 @@ function myFunction() {
     return;
   } 
 
+  if (KEYWORD == null) {
+    Logger.log("INFO: KEYWORD not found in Script Properties. Will process each incoming email messages.");
+    return;
+  }
+
   // Create label, if it doesn't yet exist, to mark emails we've processed so we don't do it again
   var labelName = "POSTedToStore";
-  var subjectKeyword = "Zelle";
 
   var label = GmailApp.getUserLabelByName(labelName);  
   if (label == null) {
@@ -94,8 +100,14 @@ function myFunction() {
     Logger.log("INFO: POSTedToStore Label created successfully");
   } 
 
-  // Construct the search query to 1) exclude that label and 2) require the subjectKeyword
-  var searchQuery = "-label:" + labelName + " AND subject:" + subjectKeyword;
+  // Construct the search query to
+  // 1) limit us to most recent month (to avoid processing hundreds of old irrelevant messages)
+  // 2) exclude that label
+  // 3) require the subjectKeyword
+  var searchQuery = "newer_than:1m AND -label:" + labelName;
+  if (KEYWORD) {
+     searchQuery += " AND subject:" + subjectKeyword;
+  }
 
   // Execute the search
   var threads = GmailApp.search(searchQuery);
