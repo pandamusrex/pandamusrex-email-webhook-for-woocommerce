@@ -172,4 +172,8 @@ function myFunction() {
 4. Run the file
 5. If you get an Authorization required dialog, click on Review permissions
 6. If you get a "Google hasn't verified this app" click on Advanced and then "Go to Email Webhook for WooCommerce (unsafe)"
-7. 
+7. Review the permission request and grant it. The script should run on the most recent month's of emails the first time and then afterwards only run on new emails it hasn't seen before. It uses a label to mark messages it has seen (it does not change their read-unread status.)
+8. Go to Triggers (looks like a little alarm clock)
+9. Click on Create a new trigger
+10. Accept all the defaults (myFunction, Head, Time-driven, Hour timer, Every hour, Notify me daily)
+11. There is no need to do Deploy
