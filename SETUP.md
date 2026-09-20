@@ -76,6 +76,8 @@ function myFunction() {
     return;
   } 
 
+  Logger.log("INFO: APIUSER = " + APIUSER);
+
   if (APIPASS == null) {
     Logger.log("ERROR: APIPASS not found in Script Properties. Aborting.");
     return;
@@ -84,11 +86,12 @@ function myFunction() {
   if (APIURL == null) {
     Logger.log("ERROR: APIURL not found in Script Properties. Aborting.");
     return;
-  } 
+  }
+
+  Logger.log("INFO: APIURL = " + APIURL);
 
   if (KEYWORD == null) {
-    Logger.log("INFO: KEYWORD not found in Script Properties. Will process each incoming email messages.");
-    return;
+    Logger.log("INFO: KEYWORD not found in Script Properties. Will process each incoming email message.");
   }
 
   // Create label, if it doesn't yet exist, to mark emails we've processed so we don't do it again
@@ -108,6 +111,8 @@ function myFunction() {
   if (KEYWORD) {
      searchQuery += " AND subject:" + subjectKeyword;
   }
+
+  Logger.log("INFO: searchQuery = " + searchQuery);
 
   // Execute the search
   var threads = GmailApp.search(searchQuery);
@@ -136,7 +141,7 @@ function myFunction() {
         var options = {
           method: 'post',
           headers: {
-          Authorization: 'Basic ' + Utilities.base64Encode(APIUSER + ":" + APIPASS)
+            Authorization: 'Basic ' + Utilities.base64Encode(APIUSER + ":" + APIPASS)
           },
           muteHttpExceptions: true,
           contentType: 'application/json',
