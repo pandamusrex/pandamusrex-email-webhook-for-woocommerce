@@ -32,7 +32,7 @@ class PandamusRex_Email_Webhook_Db {
     public static function get_all_notifications() {
         global $wpdb;
 
-        $sql = 'SELECT * FROM %i ORDER BY id DESC';
+        $sql = 'SELECT * FROM %i ORDER BY email_received DESC';
         $vars = [ self::getTableName() ];
         $results = $wpdb->get_results( $wpdb->prepare( $sql, $vars ), ARRAY_A );
 

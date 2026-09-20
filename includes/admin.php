@@ -477,6 +477,7 @@ class PandamusRex_Payment_Notifications_Admin {
         echo '<hr class="wp-header-end">';
 
         echo '<p>&nbsp;</p>';
+        echo '<p>Not yet implemented</p>';
         echo '</div>';
     }
 

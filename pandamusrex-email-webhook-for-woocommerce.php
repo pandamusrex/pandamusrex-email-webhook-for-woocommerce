@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: PandamusRex Email Webhook for WooCommerce
- * Version: 1.3.0
+ * Version: 1.4.0
  * Plugin URI: https://github.com/pandamusrex/pandamusrex-email-webhook-for-woocommerce
  * Description: Assign payment receipt emails and complete orders with a webhook that connects your email to WooCommerce.
  * Author: PandamusRex
