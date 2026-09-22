@@ -14,6 +14,16 @@ class PandamusRex_Email_Webhook_Rest_Controller extends \WP_REST_Controller {
             $this->namespace,
             '/' . $this->rest_base . '/',
             [
+                'methods'             => \WP_REST_Server::READABLE,
+                'callback'            => [ $this, 'get_silence' ],
+                'permission_callback' => [ $this, 'check_silence_permission' ],
+            ]
+        );
+
+        register_rest_route(
+            $this->namespace,
+            '/' . $this->rest_base . '/',
+            [
                 'methods'             => \WP_REST_Server::CREATABLE,
                 'callback'            => [ $this, 'post_email' ],
                 'permission_callback' => [ $this, 'check_permission' ],
@@ -22,7 +32,11 @@ class PandamusRex_Email_Webhook_Rest_Controller extends \WP_REST_Controller {
     }
 
     public function get_silence() {
-        return 'Silence is golden.';
+        if ( function_exists( 'wc_get_logger' ) ) {
+            wc_get_logger()->debug( "In PandamusRex_Email_Webhook_Rest_Controller silence endpoint" );
+        }
+
+        return 'Silence is golden. Rawr.';
     }
 
     public function post_email( $request ) {
@@ -37,7 +51,7 @@ class PandamusRex_Email_Webhook_Rest_Controller extends \WP_REST_Controller {
         }
 
         if ( function_exists( 'wc_get_logger' ) ) {
-            wc_get_logger()->debug( "In PandamusRex_Email_Webhook_Rest_Controller webhook processing code" );
+            wc_get_logger()->debug( "In PandamusRex_Email_Webhook_Rest_Controller webhook processing endpoint" );
         }
 
         $email_subject = sanitize_text_field( $decoded_body[ 'email_subject' ] );
@@ -69,6 +83,10 @@ class PandamusRex_Email_Webhook_Rest_Controller extends \WP_REST_Controller {
         }
 
         return new WP_REST_Response( true, 200 );
+    }
+
+    public function check_silence_permission() {
+        return true;
     }
 
     public function check_permission() {
