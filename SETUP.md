@@ -109,7 +109,7 @@ function myFunction() {
   // 3) require the subjectKeyword
   var searchQuery = "newer_than:1m AND -label:" + labelName;
   if (KEYWORD) {
-     searchQuery += " AND subject:" + subjectKeyword;
+     searchQuery += " AND subject:" + KEYWORD;
   }
 
   Logger.log("INFO: searchQuery = " + searchQuery);

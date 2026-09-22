@@ -4,7 +4,7 @@ Donate link: https://pandamusrex.com/
 Tags: woocommerce
 Requires at least: 6.4
 Tested up to: 6.8
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 Requires PHP: 7.0
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -22,6 +22,9 @@ Assign payment receipt emails and complete orders with a webhook that connects y
 Yes!
 
 == Changelog ==
+
+= 1.5.0 =
+* Add more debugging on REST API
 
 = 1.4.0 =
 * Sort notifications in wp-admin with most recent at top
